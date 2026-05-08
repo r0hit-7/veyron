@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+python-dotenv
+requests
+google-generativeai
+google-genai
+firebase-admin
+pydantic
+pydantic-settings
+email-validator
+python-multipart
+cachetools
+gunicorn
+numpy
+opencv-python-headless
