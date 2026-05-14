@@ -14,6 +14,7 @@ export default defineConfig({
     sourcemap: false,
     minify: 'esbuild',
     rollupOptions: {
+      external: ['@splinetool/runtime'],
       output: {
         manualChunks: {
           'vendor': ['react', 'react-dom'],
