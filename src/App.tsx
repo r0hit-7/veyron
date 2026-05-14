@@ -20,6 +20,7 @@ function AppContent() {
   const [page, setPage] = useState<Page>('home');
   const [chatOpen, setChatOpen] = useState(false);
   const [chatEmergency, setChatEmergency] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function navigate(p: string) {
     setPage(p as Page);
@@ -37,14 +38,29 @@ function AppContent() {
 
   useEffect(() => {
     const handler = (evt: Event) => {
-      const custom = evt as CustomEvent<{ page?: string }>;
-      if (custom.detail?.page) {
-        navigate(custom.detail.page);
+      try {
+        const custom = evt as CustomEvent<{ page?: string }>;
+        if (custom.detail?.page) {
+          navigate(custom.detail.page);
+        }
+      } catch (e) {
+        console.error('Navigation error:', e);
+        setError(String(e));
       }
     };
     window.addEventListener('cybersaathi:navigate', handler as EventListener);
     return () => window.removeEventListener('cybersaathi:navigate', handler as EventListener);
   }, []);
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#060d1f] flex items-center justify-center">
+        <div className="text-center text-white">
+          <p className="text-red-400">Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   const showNavAndFooter = page !== 'emergency';
 
