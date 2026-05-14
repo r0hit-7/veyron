@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // REQUIRED for GitHub Pages: assets must be served from /veyron/ not /
+  base: '/veyron/',
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
